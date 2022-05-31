@@ -4,9 +4,7 @@ socket.on("drawMensage", (text)=>{
     const div = document.querySelector(".mensage")
 
     div.innerText += `
-    <p>
         ${text}
-    <p>
     `
 })
 
