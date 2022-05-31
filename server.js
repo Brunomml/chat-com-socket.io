@@ -9,11 +9,7 @@ app.use(express.static("public"))
 
 socket.on("connection", (stream)=>{
     stream.on("mensage", (text)=>{
-        try {
-            socket.emit("drawMensage", text)
-            socket.broadcast.emit("drawMensage", text)
-        } catch (error) {
-        }
+        socket.emit("drawMensage", text)
     })
 })
 
