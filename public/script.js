@@ -3,7 +3,7 @@ const socket = io()
 socket.on("drawMensage", (text)=>{
     const div = document.querySelector(".mensage")
 
-    div.innerHTML += `
+    div.innerText += `
     <p>
         ${text}
     <p>
