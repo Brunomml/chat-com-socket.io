@@ -8,12 +8,15 @@ const PORT = process.env.PORT || 3000
 
 app.use(express.static("public"))
 
-socket.on("connection", (stream)=>{
-    stream.on("mensage", (text)=>{
-        socket.emit("drawMensage", text)
-    })
-})
+function connection(stream) {
+    // enviar mensagem
+    function sendMessage(text, author) {
+        socket.emit("messageServer", text, author)
+    }
 
-server.listen(PORT, ()=>{
-    console.log(PORT);
-})
+    //receber mensagem
+    stream.on("messageClient", sendMessage)
+}
+
+socket.on("connection", connection)
+server.listen(PORT, () => console.log(PORT))

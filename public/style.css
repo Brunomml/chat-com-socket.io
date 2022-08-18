@@ -1,29 +1,45 @@
 body{
-    padding: 10px;
+    font-size: large;
     background: #444444;
     color: #ffffff;
+    margin: 0;
+    padding: 0;
 }
 
-form{
+footer{
     background: #333333;
-    position: fixed;
+    width: 100vw;
+    position: absolute;
     display: flex;
     bottom: 0;
-    left: 0;
-    right: 0;
     padding: 10px 20px;
     box-sizing: border-box;
 }
 
 input.text {
-    border: none;
     background: #ffffff;
+    border: none;
+    flex-grow: 1;
     padding: 0 1rem; 
-    flex-grow: 1; 
     border-radius: 2rem; 
-    margin: 0.25rem; 
+    margin: 0.25rem;
+    height: 30px;
+    font-size: large;
 }
 input.btn{
     border: none;
     border-radius: 20px;
+}
+
+.message {
+    
+    position: absolute;
+    bottom: 60px;
+    margin: 10px;
+    list-style: none;
+    word-break: break-word;
+}
+.message div {
+    display: list-item;
+    max-width: 40vw
 }

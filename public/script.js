@@ -1,18 +1,27 @@
 const socket = io()
 
-socket.on("drawMensage", (text)=>{
-    const div = document.querySelector(".mensage")
+let author = prompt("digite seu nome:") || "unnamed";
+author = mess_with_the_string(author)
 
-    div.innerText += `${text}`
-    div.innerHTML += "<br/>"
-})
+
+function drawMessage(text, author){
+    const messagesEl = document.querySelector(".message")
+    messagesEl.innerHTML += `<li><div><span style="color: #88f;">${author}</span><div>${text}</div></div></li>`
+}
 
 function sendMensage() {
-    const inputText = document.querySelector(".text")
-    socket.emit("mensage", `${inputText.value}`)
+    const inputEl = document.querySelector("input.text")
+    const text = mess_with_the_string(inputEl.value)
+    if(text == '') return
+
+    inputEl.value = ''
+    socket.emit("messageClient", text, author)
 }
-addEventListener("keydown", (event)=>{
-    if (event.key == "Enter") {
-        sendMensage()
-    }
-})
+
+function keyDown(event) {
+    if (event.key == "Enter") sendMensage()
+}
+
+
+socket.on("messageServer", drawMessage)
+addEventListener("keydown", keyDown)
