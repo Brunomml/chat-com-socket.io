@@ -1,12 +1,23 @@
 const socket = io()
 
-let author = prompt("digite seu nome:") || "unnamed";
-author = mess_with_the_string(author)
+let nickName = prompt("digite seu nome:") || "unnamed";
+nickName = mess_with_the_string(nickName)
+let previous_author;
 
-
-function drawMessage(text, author){
+function drawMessage(text, message_author){
     const messagesEl = document.querySelector(".message")
-    messagesEl.innerHTML += `<li><div><span style="color: #88f;">${author}</span><div>${text}</div></div></li>`
+
+    let element = ''
+    let author = `<span style='color: #88f;'>${message_author}</span>`
+    let message = `<div><div>${text}</div></div>`
+    
+    element = `<li>${message}</li>`
+    if (message_author != previous_author) {
+        element = `<li>${author} ${message}</li>`
+    }
+    
+    messagesEl.innerHTML += element
+    previous_author = message_author
 }
 
 function sendMensage() {
@@ -15,7 +26,7 @@ function sendMensage() {
     if(text == '') return
 
     inputEl.value = ''
-    socket.emit("messageClient", text, author)
+    socket.emit("messageClient", text, nickName)
 }
 
 function keyDown(event) {
